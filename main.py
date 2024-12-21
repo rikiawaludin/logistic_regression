@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from joblib import load
 import numpy as np
+import os  # Tambahkan impor os di sini
 
 # Inisialisasi Flask
 app = Flask(__name__)
@@ -27,7 +28,7 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-
 # Menjalankan Flask
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Gunakan konfigurasi port dari environment
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
